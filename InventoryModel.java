@@ -12,7 +12,6 @@ import java.util.LinkedList;
 public class InventoryModel {
 
     // JDBC driver name, protocol, used to create a connection to the DB
-    private static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     private static String protocol = "jdbc:derby:";
     private static String dbName = "laptopInventoryDB";
 
@@ -133,7 +132,6 @@ public class InventoryModel {
     private void createConnection() throws Exception {
 
         try {
-            Class.forName(driver);  //Instantiate a driver object
             conn = DriverManager.getConnection(protocol + dbName + ";create=true", USER, PASS);
             statement = conn.createStatement();
             allStatements.add(statement);
