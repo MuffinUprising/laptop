@@ -279,6 +279,7 @@ public class InventoryModel {
         return allLaptops;
     }
 
+    //reassign laptop method
     public boolean editLaptop(int idNumber, String staff) {
 
         String editLaptopSQLps = "UPDATE laptops SET staff = ? WHERE id = ?" ;
@@ -300,6 +301,7 @@ public class InventoryModel {
         return true;
     }
 
+    //retire laptop method
     public boolean retireLaptop(int idNumber) {
 
         String retire = "DELETE FROM laptops WHERE id =?";
