@@ -44,6 +44,26 @@ public class InventoryController {
 
     }
 
+    public String requestEditLaptop(int idNumber, String staff) {
+
+        boolean success = db.editLaptop(idNumber, staff);
+        if(success == true) {
+            return null;
+        } else {
+            return "Unable to edit laptop in database.";
+        }
+    }
+
+    public String requestRetireLaptop(int idNumber) {
+
+        boolean success = db.retireLaptop(idNumber);
+        if(success == true) {
+            return null;
+        } else {
+            return "Unable to retire laptop from database.";
+        }
+    }
+
     public String requestAddLaptop(Laptop l) {
 
         //This message should arrive from the UI. Send a message to the db to request that this laptop is added.

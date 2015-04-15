@@ -1,12 +1,12 @@
 /** @author Clara MCTC Java Programming Class */
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.LinkedList;
+        import java.sql.DriverManager;
+        import java.sql.PreparedStatement;
+        import java.sql.ResultSet;
+        import java.sql.SQLException;
+        import java.sql.Statement;
+        import java.util.LinkedList;
 
 
 public class InventoryModel {
@@ -33,6 +33,8 @@ public class InventoryModel {
     LinkedList<Statement> allStatements = new LinkedList<Statement>();
 
     PreparedStatement psAddLaptop = null;
+    PreparedStatement psRetireLaptop = null;
+    PreparedStatement psEditLaptop = null;
 
 
     public InventoryModel(InventoryController controller) {
@@ -234,7 +236,7 @@ public class InventoryModel {
 
 
     /** Returns null if any errors in fetching laptops
-     *  Returnd empty list if no laptops in DB
+     *  Returns empty list if no laptops in DB
      *
      */
     public LinkedList<Laptop> displayAllLaptops() {
@@ -275,6 +277,44 @@ public class InventoryModel {
         //if we get here, everything should have worked...
         //Return the list of laptops, which will be empty if there is no data in the database
         return allLaptops;
+    }
+
+    public boolean editLaptop(int idNumber, String staff) {
+
+        String editLaptopSQLps = "UPDATE laptops SET staff = ? WHERE id = ?" ;
+
+
+        try{
+            psEditLaptop = conn.prepareStatement(editLaptopSQLps);
+            allStatements.add(psEditLaptop);
+            psEditLaptop.setString(1, staff);
+            psEditLaptop.setInt(2, idNumber);
+
+            psEditLaptop.executeUpdate();
+
+        }catch(SQLException sqe) {
+            System.out.println(sqe);
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean retireLaptop(int idNumber) {
+
+        String retire = "DELETE FROM laptops WHERE id =?";
+        try{
+            psRetireLaptop = conn.prepareStatement(retire);
+            allStatements.add(psRetireLaptop);
+            psRetireLaptop.setInt(1, idNumber);
+            psRetireLaptop.executeUpdate();
+
+        }catch (SQLException sqe) {
+            System.out.println(sqe);
+            return false;
+        }
+        return true;
+
     }
 }
 
