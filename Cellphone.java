@@ -1,8 +1,7 @@
-/** @author Clara MCTC Java Programming Class */
-
-
-public class Laptop {
-
+/**
+ * Created by casey on 4/20/15.
+ */
+public class Cellphone {
 
     protected String make;
     protected String model;
@@ -10,14 +9,14 @@ public class Laptop {
     protected int id;
     protected final int NOID = -1;   //Value to represent no ID known
 
-    Laptop (String make, String model, String staff) {
+    Cellphone (String make, String model, String staff) {
         this.make = make;
         this.model = model;
         this.staff = staff;
         this.id = NOID ; //flag for no ID known
     }
 
-    Laptop (int id, String make, String model, String staff) {
+    Cellphone (int id, String make, String model, String staff) {
         this(make, model, staff);
         this.id = id;
     }
@@ -41,9 +40,8 @@ public class Laptop {
 
         String idData = (this.id == this.NOID) ? "<No ID assigned>" : Integer.toString(this.id) ;
 
-        String laptopData = "Laptop ID: " +  idData + " Make, Model: " + this.make + " " + this.model + " Assigned to " + this.staff;
-        return laptopData;
+        String cellphoneData = "Cellphone ID: " +  idData + " Make, Model: " + this.make + " " + this.model + " Assigned to " + this.staff;
+        return cellphoneData;
 
     }
-
 }

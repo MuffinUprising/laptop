@@ -44,6 +44,7 @@ public class InventoryController {
 
     }
 
+    //request edit laptop method
     public String requestEditLaptop(int idNumber, String staff) {
 
         boolean success = db.editLaptop(idNumber, staff);
@@ -54,6 +55,18 @@ public class InventoryController {
         }
     }
 
+    //request edit cellphone method
+    public String requestEditCellphone(int idNumber, String staff) {
+
+        boolean success = db.editCellphone(idNumber, staff);
+        if(success == true) {
+            return null;
+        } else {
+            return "Unable to edit cellphone in database.";
+        }
+    }
+
+    //request retire laptop method
     public String requestRetireLaptop(int idNumber) {
 
         boolean success = db.retireLaptop(idNumber);
@@ -64,6 +77,18 @@ public class InventoryController {
         }
     }
 
+    //request retire cellphone method
+    public String requestRetireCellphone(int idNumber) {
+
+        boolean success = db.retireCellphone(idNumber);
+        if(success == true) {
+            return null;
+        } else {
+            return "Unable to retire laptop from database.";
+        }
+    }
+
+    //request add laptop method
     public String requestAddLaptop(Laptop l) {
 
         //This message should arrive from the UI. Send a message to the db to request that this laptop is added.
@@ -78,9 +103,25 @@ public class InventoryController {
 
     }
 
-    public LinkedList<Laptop> requestAllInventory() {
+    //request add cellphone method
+    public String requestAddCellphone(Cellphone c) {
 
+        //This message should arrive from the UI. Send a message to the db to request that this laptop is added.
+        //Return error message, if any. Return null if transaction was successful.
+        boolean success = db.addCellphone(c);
+        if (success == true ) {
+            return null;   //Null means all was well.
+        }
+        else {
+            return "Unable to add cellphone to database";
+        }
 
+    }
+
+    //request all laptops method
+    public LinkedList<Laptop> requestAllLaptopInventory() {
+
+        //LinkedList for all laptops
         LinkedList<Laptop> allLaptops = db.displayAllLaptops();
         if (allLaptops == null ) {
             System.out.println("Controller detected error in fetching laptops from database");
@@ -89,9 +130,51 @@ public class InventoryController {
         else {
             return allLaptops;
         }
-
-
     }
+
+    //request all cellphones method
+    public LinkedList<Cellphone> requestAllCellphoneInventory() {
+
+        //LinkedList for all cellphones
+        LinkedList<Cellphone> allCellphones = db.displayAllCellphones();
+        if (allCellphones == null ) {
+            System.out.println("Controller detected error in fetching cellphones from database");
+            return null;
+        }
+        else {
+            return allCellphones;
+        }
+    }
+
+    //rewuest all laptops for user method
+    public LinkedList<Laptop> requestAllLaptopInvUser(String staff) {
+
+        //LinkedList for laptops for user
+        LinkedList<Laptop> allLaptopsForUser = db.displayAllLaptopsUser(staff);
+        if (allLaptopsForUser == null ) {
+            System.out.println("Controller detected error in fetching laptops from database");
+            return null;   //Null means error. View can deal with how to display error to user.
+        }
+        else {
+            return allLaptopsForUser;
+        }
+    }
+
+    //request all cellphones for user method
+    public LinkedList<Cellphone> requestAllCellphoneInvUser(String staff) {
+
+        //LinkedList for cellphones for user
+        LinkedList<Cellphone> allCellphonesForUser = db.displayAllCellphonesUser(staff);
+        if (allCellphonesForUser == null ) {
+            System.out.println("Controller detected error in fetching cellphones from database");
+            return null;   //Null means error. View can deal with how to display error to user.
+        }
+        else {
+            return allCellphonesForUser;
+        }
+    }
+
+
 
 }
 
